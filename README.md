@@ -5,7 +5,7 @@ NamelessMC v2 pre6 | Staff Control Panel
 |----------|--------------------|----------------
 | 1.0      | :white_check_mark: | v2.0.0 Pre-6
 
-##Setup
+## Setup
 
 1. Upload the ZIP file to the home directory for NamelessMC
 2. Unzip the file.
