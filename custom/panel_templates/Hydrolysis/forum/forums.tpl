@@ -73,23 +73,28 @@
                             {/if}
 
                             {if count($FORUMS_ARRAY)}
-                                <div class="table-responsive">
+                                <div class="table table-bordered table-striped">
                                     <table class="table">
+									
                                         <tbody id="sortable">
+                                        <tr>
+                                            <th>Forum</th>
+                                        </tr>
+                  
                                         {foreach from=$FORUMS_ARRAY item=item name=forum_array}
                                             <tr data-id="{$item.id}">
                                                 <td{if $item.parent_forum} style="padding-left:{math equation="x * y" x=25 y=$item.parent_forum_count}px"{/if}>
-                                                    <a href="{$item.edit_link}">{$item.title}</a>{if $item.parent_forum} <small>| {$item.parent_forum}</small>{/if}<br />{$item.description}
+                                                    <a href="{$item.edit_link}" class="badge badge-warning">{$item.title}</a>{if $item.parent_forum} <small>| {$item.parent_forum}</small>{/if}<br />{$item.description}
                                                 </td>
                                                 <td>
                                                     <div class="float-md-right">
                                                         {if $item.up_link}
-                                                            <a href="{$item.up_link}" class="btn btn-success btn-sm"><i class="fas fa-chevron-up"></i></a>
+                                                            <a href="{$item.up_link}" class="btn btn-success btn-sm"><i class="fas fa-level-up-alt"></i></a>
                                                         {/if}
                                                         {if $item.down_link}
-                                                            <a href="{$item.down_link}" class="btn btn-warning btn-sm"><i class="fas fa-chevron-down"></i></a>
+                                                            <a href="{$item.down_link}" class="btn btn-warning btn-sm"><i class="fas fa-level-down-alt"></i></a>
                                                         {/if}
-                                                        <a href="{$item.delete_link}" class="btn btn-danger btn-sm"><i class="fas fa-trash"></i></a>
+                                                        <a href="{$item.delete_link}" class="btn btn-danger btn-sm"><i class="fas fa-recycle"></i></a>
                                                     </div>
                                                 </td>
                                             </tr>

@@ -1,6 +1,8 @@
 <footer class="main-footer">
     <div class="float-right d-sm-none d-md-block">
-        {$PAGE_LOAD_TIME}
+      <!--  {$PAGE_LOAD_TIME} -->
+    <a href="/logout" class="btn btn-success">Logout</a>
+    <a href="{$SITE_HOME}" class="btn btn-success">Return to Forums</a>
     </div>
 
     {*

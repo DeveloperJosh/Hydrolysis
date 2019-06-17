@@ -31,7 +31,7 @@ if(!class_exists('Hydrolysis_StaffCP')){
 
 			parent::__construct(
 				'Hydrolysis',  // Template name
-				'v1.0',  // Template version
+				'v1.2',  // Template version
 				'2.0.0-pr6',  // Nameless version template is made for
 				'<a href="https://discord.gg/hmWgxdF">Emerald</a>'  // Author, you can use HTML here
 			);
