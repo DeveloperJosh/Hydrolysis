@@ -45,9 +45,6 @@
 
                     <div class="card">
                         <div class="card-body">
-                            <a href="{$NEW_FORUM_LINK}" class="btn btn-primary">{$NEW_FORUM}</a>
-                            <hr />
-
                             {if isset($SUCCESS)}
                                 <div class="alert alert-success alert-dismissible">
                                     <button type="button" class="close" data-dismiss="alert" aria-label="Close">
@@ -72,46 +69,18 @@
                                 </div>
                             {/if}
 
-                            {if count($FORUMS_ARRAY)}
-                                <div class="table table-bordered table-striped">
-                                    <table class="table">
-									
-                                        <tbody id="sortable">
-                                        <tr>
-                                            <th>Forum</th>
-                                        </tr>
-                  
-                                        {foreach from=$FORUMS_ARRAY item=item name=forum_array}
-                                            <tr data-id="{$item.id}">
-                                                <td{if $item.parent_forum} style="padding-left:{math equation="x * y" x=25 y=$item.parent_forum_count}px"{/if}>
-                                                    <a href="{$item.edit_link}" class="badge badge-warning">{$item.title}</a>{if $item.parent_forum} <small>| {$item.parent_forum}</small>{/if}<br />{$item.description}
-                                                </td>
-                                                <td>
-                                                    <div class="float-md-right">
-                                                        {if $item.up_link}
-                                                            <a href="{$item.up_link}" class="btn btn-success btn-sm"><i class="fas fa-level-up-alt"></i></a>
-                                                        {/if}
-                                                        {if $item.down_link}
-                                                            <a href="{$item.down_link}" class="btn btn-warning btn-sm"><i class="fas fa-level-down-alt"></i></a>
-                                                        {/if}
-                                                        <a href="{$item.delete_link}" class="btn btn-danger btn-sm"><i class="fas fa-recycle"></i></a>
-                                                    </div>
-                                                </td>
-                                            </tr>
-                                        {/foreach}
-                                        </tbody>
-                                    </table>
-                                </div>
-                            {else}
-                                <p>{$NO_FORUMS}</p>
-                            {/if}
-
                             <form action="" method="post">
                                 <div class="form-group">
-                                    <label for="InputEnabled">{$USE_REACTIONS}</label>
-                                    <input type="checkbox" name="enabled" id="InputEnabled" class="js-switch"{if $USE_REACTIONS_VALUE} checked{/if} />
+                                    <label for="inputNewForum">{$MOVE_TOPICS_AND_POSTS_TO}</label>
+                                    <select id="inputNewForum" class="form-control" name="move_forum">
+                                        <option value="none" selected>{$DELETE_TOPICS_AND_POSTS}</option>
+                                        {foreach from=$OTHER_FORUMS item=item}
+                                            <option value="{$item.id}">{$item.name}</option>
+                                        {/foreach}
+                                    </select>
                                 </div>
                                 <input type="hidden" name="token" value="{$TOKEN}">
+                                <input type="hidden" name="confirm" value="true">
                                 <input type="submit" class="btn btn-primary" value="{$SUBMIT}" />
                             </form>
 
@@ -131,41 +100,6 @@
 <!-- ./wrapper -->
 
 {include file='scripts.tpl'}
-
-<script type="text/javascript">
-    $(document).ready(function(){
-        $("#sortable").sortable({
-            start: function(event, ui) {
-                let start_pos = ui.item.index();
-                ui.item.data('startPos', start_pos);
-            },
-            update: function(event, ui){
-                let forums = $("#sortable").children();
-                let toSubmit = [];
-                forums.each(function(){
-                    toSubmit.push($(this).data().id);
-                });
-
-                $.ajax({
-                    url: "{$REORDER_DRAG_URL}",
-                    type: "GET",
-                    data: {
-                        action: "order",
-                        dir: "drag",
-                        {literal}forums: JSON.stringify({"forums": toSubmit}){/literal}
-                    },
-                    success: function(response) {
-                        // Success
-                    },
-                    error: function(xhr) {
-                        // Error
-                        console.log(xhr);
-                    }
-                });
-            }
-        });
-    });
-</script>
 
 </body>
 </html>
